@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>Prediction History</title></head>
+<body>
+    <h2>Recent Predictions</h2>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Car</th>
+            <th>Year</th>
+            <th>Predicted Price</th>
+        </tr>
+        {% for p in predictions %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.brand }} {{ p.model_name }}</td>
+            <td>{{ p.year }}</td>
+            <td>${{ "{:,.2f}".format(p.predicted_price) }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/">Back to Predictor</a>
+</body>
+</html>

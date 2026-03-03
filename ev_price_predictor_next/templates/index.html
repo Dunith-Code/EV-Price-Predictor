@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EV Price Pro</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f4f7f6; display: flex; justify-content: center; padding: 20px; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; }
+        h2 { color: #2c3e50; text-align: center; margin-top: 0; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        label { font-size: 12px; font-weight: bold; color: #7f8c8d; display: block; margin-bottom: 5px; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; font-size: 14px; }
+        .full-width { grid-column: span 2; }
+        button { width: 100%; padding: 15px; background: #27ae60; color: white; border: none; border-radius: 6px; font-size: 16px; cursor: pointer; margin-top: 20px; font-weight: bold; }
+        button:hover { background: #219150; }
+        .result { margin-top: 20px; padding: 15px; background: #ebf5fb; color: #2980b9; border-radius: 6px; text-align: center; font-weight: bold; border-left: 5px solid #2980b9; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>EV Price Predictor</h2>
+        <form action="/predict" method="post">
+            <div class="grid">
+                <div class="full-width">
+                    <label>Manufacturer</label>
+                    <select name="brand">
+                        {% for b in brands %}<option value="{{b}}">{{b}}</option>{% endfor %}
+                    </select>
+                </div>
+                <div class="full-width">
+                    <label>Model Name</label>
+                    <input type="text" name="model_name" placeholder="e.g. Taycan" required>
+                </div>
+                <div>
+                    <label>Year</label>
+                    <input type="number" name="year" value="2025" min="2010" max="2026">
+                </div>
+                <div>
+                    <label>Battery (kWh)</label>
+                    <input type="number" name="battery" step="0.1" placeholder="75" required>
+                </div>
+                <div>
+                    <label>Range (km)</label>
+                    <input type="number" name="range" placeholder="450" required>
+                </div>
+                <div>
+                    <label>Charge Time (hr)</label>
+                    <input type="number" name="charge_time" step="0.1" placeholder="8" required>
+                </div>
+                <div>
+                    <label>Autonomy (0-5)</label>
+                    <input type="number" name="autonomy" step="0.1" placeholder="3" required>
+                </div>
+                <div>
+                    <label>Safety (1-5)</label>
+                    <input type="number" name="safety" step="0.1" placeholder="5" required>
+                </div>
+                <div class="full-width">
+                    <label>Warranty (Years)</label>
+                    <input type="number" name="warranty" placeholder="8" required>
+                </div>
+            </div>
+            <button type="submit">Predict Estimated Price</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">{{ prediction }}</div>
+        {% endif %}
+    </div>
+</body>
+</html>
