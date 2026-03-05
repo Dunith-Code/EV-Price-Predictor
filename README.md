@@ -23,5 +23,5 @@ This project solves a **Supervised Regression** problem.
 
 ### 1. Clone the Repository
 ```bash
-git clone [https://github.com/your-username/ev-price-predictor.git](https://github.com/your-username/ev-price-predictor.git)
-cd ev-price-predictor
+git clone https://github.com/Dunith-Code/EV-Price-Predictor.git
+cd EV-Price-Predictor
